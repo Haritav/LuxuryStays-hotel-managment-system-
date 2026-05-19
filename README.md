@@ -33,7 +33,7 @@ LuxuryStays/
 ├── app.py
 ├── requirements.txt
 ├── README.md
-├── schema.sql
+├── project.sql
 │
 ├── templates/
 │   ├── login.html
@@ -52,7 +52,7 @@ LuxuryStays/
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/LuxuryStays.git
+git clone https://github.com/Haritav/LuxuryStays-hotel-managment-system-.git
 ```
 
 2. Navigate into the project directory
