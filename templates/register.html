@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | LuxuryStays</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse all the existing styles from login page */
+        :root {
+            --primary-color: #003580;
+            --secondary-color: #0071c2;
+            --accent-color: #febb02;
+            --dark-text: #1a1a1a;
+            --light-text: #666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-radius: 4px;
+            --box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        /* Header styles (same as main page) */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Registration-specific styles */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 60px 0;
+        }
+
+        .auth-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+        }
+
+        .auth-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+        }
+
+        .auth-form input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--light-text);
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .name-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Footer styles (same as main page) */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            margin-left: 15px;
+            font-size: 18px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .name-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="project.html" class="logo">Luxury<span>Stays</span></a>
+                <div class="user-nav">
+                    <a href="#"><i class="fas fa-globe"></i> USD</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1 class="auth-title">Create Your Account</h1>
+                <form class="auth-form" action="/register" method="POST">
+                    <div class="name-fields">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Press Center</li>
+                        <li>Travel Blog</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li>Help Center</li>
+                        <li>Contact Us</li>
+                        <li>Safety Information</li>
+                        <li>Cancellation Options</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>Cookie Policy</li>
+                        <li>Accessibility</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Business</h3>
+                    <ul>
+                        <li>List Your Property</li>
+                        <li>Partner Programs</li>
+                        <li>Corporate Travel</li>
+                        <li>Travel Agents</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2023 LuxuryStays. All rights reserved.</div>
+                <div class="social-icons">
+                    <a href="facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

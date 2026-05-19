@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LuxuryStays</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #003580;
+            --secondary-color: #0071c2;
+            --accent-color: #febb02;
+            --dark-text: #1a1a1a;
+            --light-text: #666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-radius: 4px;
+            --box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .btn-accent:hover {
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .user-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            padding: 60px 0;
+        }
+
+        .welcome-section {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .welcome-text {
+            flex: 1;
+        }
+
+        .welcome-text h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .welcome-text p {
+            color: var(--light-text);
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            margin-left: 30px;
+        }
+
+        .dashboard-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 22px;
+            color: var(--primary-color);
+        }
+
+        .section-header a {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .booking-card {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .hotel-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hotel-image {
+            height: 150px;
+            overflow: hidden;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .booking-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .card-detail {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .card-detail i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .card-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        /* Add to your CSS */
+        form {
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-actions button {
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            margin-left: 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .user-nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .user-nav a {
+                margin-left: 0;
+            }
+
+            .welcome-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .user-avatar {
+                margin: 20px 0 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="{{ url_for('booking_confirmation') }}" class="logo">Luxury<span>Stays</span></a>
+                <div class="user-nav">
+                    <span>Welcome, {{ account.first_name }}</span>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h1>Welcome back, {{ account.first_name }}!</h1>
+                    <p>Manage your bookings and discover new luxury stays</p>
+                </div>
+                <div class="user-avatar">
+                    {{ account.first_name[0] }}{{ account.last_name[0] }}
+                </div>
+            </div>
+
+            <!-- Recent Bookings Section -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Your Recent Bookings</h2>
+                </div>
+                
+                {% if bookings %}
+                <div class="card-grid">
+                    {% for booking in bookings %}
+                    <div class="card booking-card">
+                        <h3 class="card-title">{{ booking.hotel_name }}</h3>
+                        <div class="card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ booking.city }}, {{ booking.country }}</span>
+                        </div>
+                        <div class="card-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>{{ booking.check_in_date.strftime('%b %d, %Y') }} - {{ booking.check_out_date.strftime('%b %d, %Y') }}</span>
+                        </div>
+                        <div class="card-detail">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Total: ₹{{ "%.2f"|format(booking.total_amount) }}</span>
+                        </div>
+                        <div class="card-actions">
+                            {% if booking.status != 'cancelled' %}
+                            <form action="{{ url_for('cancel_booking', booking_id=booking.booking_id) }}" method="POST">
+                                <button type="submit" class="btn btn-primary btn-sm" 
+                                        onclick="return confirm('Are you sure you want to cancel this booking?')">
+                                    Cancel
+                                </button>
+                            </form>
+                            {% else %}
+                            <span class="badge badge-secondary">Cancelled</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="card">
+                    <p>You don't have any bookings yet.</p>
+                    <a href="/" class="btn btn-primary" style="margin-top: 15px;">Book Now</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Featured Hotels Section -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recommended For You</h2>
+                </div>
+                
+                <div class="card-grid">
+                    {% for hotel in featured_hotels %}
+                    <div class="card hotel-card">
+                        {% if hotel.image_url %}
+                        <div class="hotel-image">
+                            <img src="{{ hotel.image_url }}" alt="{{ hotel.name }}">
+                        </div>
+                        {% endif %}
+                        <h3 class="card-title">{{ hotel.name }}</h3>
+                        <div class="card-detail">
+                            <i class="fas fa-star"></i>
+                            <span>{{ hotel.star_rating }} Star Rating</span>
+                        </div>
+                        <div class="card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ hotel.city }}, {{ hotel.country }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Press Center</li>
+                        <li>Travel Blog</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li>Help Center</li>
+                        <li>Contact Us</li>
+                        <li>Safety Information</li>
+                        <li>Cancellation Options</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>Cookie Policy</li>
+                        <li>Accessibility</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Business</h3>
+                    <ul>
+                        <li>List Your Property</li>
+                        <li>Partner Programs</li>
+                        <li>Corporate Travel</li>
+                        <li>Travel Agents</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2023 LuxuryStays. All rights reserved.</div>
+                <div class="social-icons">
+                    <a href="facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

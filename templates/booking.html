@@ -1,0 +1,43 @@
+{% extends "project.html" %}
+
+{% block content %}
+<div class="container" style="padding: 60px 0;">
+    <h2 class="section-title">Book {{ hotel.name }}</h2>
+    
+    <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
+        <h3 style="margin-bottom: 20px;">Select Your Room</h3>
+        
+        <form method="POST" action="{{ url_for('book', hotel_id=hotel.hotel_id) }}">
+            <input type="hidden" name="check_in" value="{{ check_in }}">
+            <input type="hidden" name="check_out" value="{{ check_out }}">
+            <input type="hidden" name="guests" value="{{ guests }}">
+            
+            <div style="margin-bottom: 30px;">
+                {% for room in rooms %}
+                <div style="border: 1px solid #ddd; border-radius: var(--border-radius); padding: 20px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="margin-bottom: 5px;">{{ room.room_type }}</h4>
+                            <p style="color: var(--light-text); margin-bottom: 10px;">Max guests: {{ room.max_guests }}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="font-weight: bold; font-size: 18px;">${{ room.price }} <span style="font-size: 14px; font-weight: normal;">/ night</span></p>
+                            <button type="submit" name="room_id" value="{{ room.room_id }}" class="btn btn-primary">
+                                Select Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <h4>Booking Summary</h4>
+            <p>Check-in: {{ check_in }}</p>
+            <p>Check-out: {{ check_out }}</p>
+            <p>Guests: {{ guests }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

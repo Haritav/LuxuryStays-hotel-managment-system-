@@ -1,0 +1,63 @@
+{% extends "admin_dashboard.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Edit Room</h2>
+    </div>
+    
+    <form method="POST" action="{{ url_for('edit_room', room_id=room.room_id) }}">
+        
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="hotel_id">Hotel *</label>
+                <select id="hotel_id" name="hotel_id" required>
+                    <option value="">Select Hotel</option>
+                    {% for hotel in hotels %}
+                    <option value="{{ hotel.hotel_id }}" 
+                            {% if hotel.hotel_id == room.hotel_id %}selected{% endif %}>
+                        {{ hotel.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="room_type_id">Room Type *</label>
+                <select id="room_type_id" name="room_type_id" required>
+                    <option value="">Select Room Type</option>
+                    {% for room_type in room_types %}
+                    <option value="{{ room_type.room_type_id }}" 
+                            {% if room_type.room_type_id == room.room_type_id %}selected{% endif %}>
+                        {{ room_type.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="room_number">Room Number *</label>
+                <input type="text" id="room_number" name="room_number" value="{{ room.room_number }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="floor_number">Floor Number</label>
+                <input type="number" id="floor_number" name="floor_number" value="{{ room.floor_number if room.floor_number else '' }}">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_active" {% if room.is_active %}checked{% endif %}>
+                Active (Available for booking)
+            </label>
+        </div>
+        
+        <button type="submit" class="btn">Update Room</button>
+        <a href="{{ url_for('manage_rooms') }}" class="btn btn-accent">Cancel</a>
+    </form>
+</div>
+{% endblock %}

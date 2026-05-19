@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxuryStays | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #003580;
+            --secondary-color: #0071c2;
+            --accent-color: #febb02;
+            --dark-text: #1a1a1a;
+            --light-text: #666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-radius: 4px;
+            --box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .user-nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .user-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Auth Container */
+        .auth-container {
+            display: flex;
+            min-height: calc(100vh - 72px);
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .auth-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            margin: 20px;
+        }
+
+        .auth-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--light-text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+
+        .input-with-icon input {
+            padding-left: 45px;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--light-text);
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--light-text);
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .divider-text {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            background-color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .social-btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.google:hover {
+            background-color: #f8e9e8;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .social-btn.facebook:hover {
+            background-color: #e7ebf5;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-title {
+                font-size: 24px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-card {
+                margin: 10px;
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="project.html" class="logo">Luxury<span>Stays</span></a>
+                <div class="user-nav">
+                    <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1 class="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle">Sign in to access your LuxuryStays account</p>
+            
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                
+                <div class="divider">
+                    <span class="divider-text">or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="{{ url_for('register') }}">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

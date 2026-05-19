@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | LuxuryStays</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #003580;
+            --secondary-color: #0071c2;
+            --accent-color: #febb02;
+            --dark-text: #1a1a1a;
+            --light-text: #666;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-radius: 4px;
+            --box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+        }
+
+        .btn-accent:hover {
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .user-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .user-nav .register {
+            border: 1px solid var(--white);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .user-nav .register:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Search Results Section */
+        .search-results {
+            padding: 60px 0;
+        }
+
+        .results-header {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .results-title {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .results-count {
+            color: var(--light-text);
+            font-size: 14px;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .room-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.05);
+        }
+
+        .room-details {
+            padding: 20px;
+        }
+
+        .room-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .room-description {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .room-feature {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .room-feature i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .room-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .price span {
+            font-size: 14px;
+            font-weight: normal;
+            color: var(--light-text);
+        }
+
+        .no-results {
+            background-color: var(--white);
+            padding: 40px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .no-results-icon {
+            font-size: 50px;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            margin-left: 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .user-nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .user-nav a {
+                margin-left: 0;
+            }
+
+            .room-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo">Luxury<span>Stays</span></a>
+                <div class="user-nav">
+                    <a href="#"><i class="fas fa-globe"></i> USD</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Sign in</a>
+                    <a href="register.html" class="register">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Results -->
+    <section class="search-results">
+        <div class="container">
+            <div class="results-header">
+                <h2 class="results-title">Available Rooms from {{ check_in }} to {{ check_out }}</h2>
+                <div class="results-count">{{ rooms|length }} rooms found</div>
+            </div>
+
+            {% if rooms %}
+                <div class="room-grid">
+                    {% for room in rooms %}
+                        <div class="room-card">
+                            <div class="room-image">
+                                {% if room.image_url %}
+                                    <img src="{{ room.image_url }}" alt="{{ room.room_name }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/600x400?text=No+Image" alt="No Image">
+                                {% endif %}
+                            </div>
+                            <div class="room-details">
+                                <h3 class="room-name">{{ room.room_name }}</h3>
+                                <p class="room-description">{{ room.description or 'No description provided.' }}</p>
+                                
+                                <div class="room-features">
+                                    <div class="room-feature">
+                                        <i class="fas fa-user-friends"></i> {{ room.max_occupancy }} people
+                                    </div>
+                                </div>
+                                
+                                <div class="room-price">
+                                    <div class="price">₹{{ room.base_price }} <span>/ night</span></div>
+                                    <a href="{{ url_for('booking_confirmation', room_type_id=room.room_type_id, check_in=check_in, check_out=check_out) }}" class="btn btn-primary">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <div class="no-results-icon">
+                        <i class="far fa-frown"></i>
+                    </div>
+                    <h3>No rooms found matching your criteria</h3>
+                    <p>Try adjusting your search filters or dates to find available rooms.</p>
+                    <a href="/" class="btn btn-accent" style="margin-top: 20px;">Modify Search</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Press Center</li>
+                        <li>Travel Blog</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li>Help Center</li>
+                        <li>Contact Us</li>
+                        <li>Safety Information</li>
+                        <li>Cancellation Options</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>Cookie Policy</li>
+                        <li>Accessibility</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Business</h3>
+                    <ul>
+                        <li>List Your Property</li>
+                        <li>Partner Programs</li>
+                        <li>Corporate Travel</li>
+                        <li>Travel Agents</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2023 LuxuryStays. All rights reserved.</div>
+                <div class="social-icons">
+                    <a href="facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    
+                    <a href="instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
